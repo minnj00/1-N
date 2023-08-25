@@ -79,3 +79,9 @@ def comment_create(request, article_id):
         # 저장
         comment.save()
         return redirect('articles:detail', id=article_id)
+def comment_delete(request, article_id, id):
+    comment=Comment.objects.get(id=id)
+
+    comment.delete()
+
+    return redirect('articles:detail', id=article_id)
