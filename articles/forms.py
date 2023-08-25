@@ -3,7 +3,7 @@ from .models import Article
 from .models import Comment
 
 class ArticleForm(forms.ModelForm):
-    
+    # articleform 클래스는 
     class Meta:
         model = Article
         # fields -> Article 이 가지고 있는 모든 column 들을 입력 받을 거야!

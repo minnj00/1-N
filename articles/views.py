@@ -21,7 +21,7 @@ def detail(request, id):
     # 1. 첫번째 방법
     # comment_list = Comment.objects.filter(article=article)
 
-    # 2. 두번째 방법
+    # 2. 두번째 방법 (Comment에 article이 연결되있기 때문에 그 반대도 연결되어 있음)
     # 현재 article이라는 변수에는 현재 특정 id에 해당하는 article 정보가 저장되어 있음.
     # comment_list = article.comment_set.all()
 
@@ -66,10 +66,13 @@ def comment_create(request, article_id):
     # 유효성 검사
     if comment_form.is_valid():
         # form 을 저장 => 추가로 넣어야 하는 데이터를 넣기 위해 저장 멈춰!
-        comment=comment_form.save(commit=False) 
+        comment=comment_form.save(commit=False)
+
+    
         
         # 첫번째 방법.
-        # article_id를 기준으로 article obj 를 가져와서 
+        # article_id를 기준으로 article obj(article 전체정보들) 를 가져와서 
+        # 왜냐하면 Comment DB에는 article 컬럼이 따로 없기 때문
         # article = Article.objects.get(id=article_id)
         # # article 컬럼에 추가
         # comment.article = article
