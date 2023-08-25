@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{%block body%}
+
+    <h1>{{article.title}}</h1>
+    <p>{{article.content}}</p>
+
+    <hr>
+    <!-- app_name articles 와 path중 하나의 name comment_create 를 연결 -->
+    <form action="{%url 'articles:comment_create' article_id=article.id %}" method="POST">
+        {%csrf_token%}
+        {{comment_form}}
+        <input type="submit">
+    </form>
+    {% for comment in article.comment_set.all %}
+
+        <p>{{comment.content}}</p>
+
+    {%endfor%}
+{%endblock%}
