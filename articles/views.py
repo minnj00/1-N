@@ -68,17 +68,17 @@ def comment_create(request, article_id):
         # form 을 저장 => 추가로 넣어야 하는 데이터를 넣기 위해 저장 멈춰!
         comment=comment_form.save(commit=False)
 
-    
+        # 질문: 
         
         # 첫번째 방법.
         # article_id를 기준으로 article obj(article 전체정보들) 를 가져와서 
-        # 왜냐하면 Comment DB에는 article 컬럼이 따로 없기 때문
-        # article = Article.objects.get(id=article_id)
+        # Comment의 article 컬럼(정보가 없음)에 저장
+        article = Article.objects.get(id=article_id)
         # # article 컬럼에 추가
-        # comment.article = article
+        comment.article = article
 
-        # 두번째 방법
-        comment.article_id = article_id
+        # 두번째 방법 : 속도가 좀 더 빠름.
+        # comment.article_id = article_id # -> 이렇게 하더라도 article_id에 저장된 값에 따라 장고 컬럼 article에 article_id에 해당하는 정보를 넣어줌
         # 저장
         comment.save()
         return redirect('articles:detail', id=article_id)
